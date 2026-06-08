@@ -7,7 +7,6 @@
     Title="Shared_Clipboard_Frontend">
 
     <ShellContent
-        Title="Login"
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage" />
 

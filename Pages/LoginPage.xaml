@@ -1,10 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Shared_Clipboard_Frontend.LoginPage">
-    <ScrollView>
-        <VerticalStackLayout>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Shared_Clipboard_Frontend.LoginPage"
+    BackgroundColor="{StaticResource OffBlack}"
+    Padding="20">
 
-        </VerticalStackLayout>
+    <ScrollView>
+        <Grid VerticalOptions="Center" HorizontalOptions="Center">
+            <Grid WidthRequest="400" x:Name="FormContainer" HorizontalOptions="Center">
+                <Border
+                    Stroke="{StaticResource Tertiary}"
+                    StrokeThickness="2"
+                    BackgroundColor="{StaticResource Black}"
+                    Padding="18">
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            Text="Login"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            Margin="0,0,0,6"/>
+
+                        <Entry
+                            x:Name="EmailEntry"
+                            Placeholder="Email"
+                            HorizontalOptions="Fill"
+                            Margin="0"/>
+
+                        <Entry
+                            x:Name="PasswordEntry"
+                            Placeholder="Password"
+                            IsPassword="True"
+                            HorizontalOptions="Fill"/>
+
+                        <Button
+                            Text="Login"
+                            HorizontalOptions="Fill"
+                            HeightRequest="44" 
+                            Clicked="OnPressLoginButton"
+                            Released="OnRealesedLoginButton"/>
+
+                        <Label
+                            Text="Register"
+                            HorizontalOptions="Center"
+                            TextDecorations="Underline"
+                            Margin="0,6,0,0"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </Grid>
     </ScrollView>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="WidthStates">
+            <VisualState x:Name="Narrow">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="0" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="FormContainer" Property="WidthRequest" Value="320" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="Normal">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="600" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="FormContainer" Property="WidthRequest" Value="420" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="Wide">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="900" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="FormContainer" Property="WidthRequest" Value="520" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
 </ContentPage>
