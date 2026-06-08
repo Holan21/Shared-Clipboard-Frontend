@@ -1,4 +1,5 @@
 ﻿using Shared_Clipboard_Frontend.Services.api;
+using Shared_Clipboard_Frontend.ViewModels;
 using System.Diagnostics;
 
 namespace Shared_Clipboard_Frontend
@@ -6,24 +7,13 @@ namespace Shared_Clipboard_Frontend
 
     public partial class LoginPage : ContentPage
     {
-        private readonly ILogin _login;
+        private readonly LoginViewModel _viewModel;
 
-        public LoginPage(ILogin login)
+        public LoginPage(LoginViewModel viewModel)
         {
-            _login = login;
             InitializeComponent();
-        }
-
-        private void OnPressLoginButton(object sender, EventArgs e)
-        {
-            var button = sender as Button;
-            Debug.Print("Pressed");
-        }
-
-        private void OnRealesedLoginButton(object sender, EventArgs e)
-        {
-            var button = sender as Button;
-            Debug.Print("Realsed");
+            BindingContext = viewModel;
+            _viewModel = viewModel;
         }
     }
 }

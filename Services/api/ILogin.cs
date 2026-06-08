@@ -1,8 +1,8 @@
 ﻿namespace Shared_Clipboard_Frontend.Services.api
 {
-    internal interface ILogin
+    public interface ILogin
     {
-        public string Login(string email, string password);
+        public Task<string> LoginAsync(string email, string password);
 
     }
 }
