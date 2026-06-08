@@ -1,12 +1,16 @@
-﻿using System.Diagnostics;
+﻿using Shared_Clipboard_Frontend.Services.api;
+using System.Diagnostics;
 
 namespace Shared_Clipboard_Frontend
 {
 
     public partial class LoginPage : ContentPage
     {
-        public LoginPage()
+        private readonly ILogin _login;
+
+        public LoginPage(ILogin login)
         {
+            _login = login;
             InitializeComponent();
         }
 
