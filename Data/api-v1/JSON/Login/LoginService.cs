@@ -17,7 +17,7 @@ namespace Shared_Clipboard_Frontend.Data.api_v1.JSON.Login
 
             var content = new StringContent(json, MediaTypeHeaderValue.Parse("text/json"));
             var result = await client.PostAsync("Auth/login",content);
-
+            
             return result.ToString();
         }
     }
