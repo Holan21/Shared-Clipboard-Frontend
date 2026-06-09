@@ -1,25 +1,36 @@
 ﻿using Microsoft.Extensions.Logging;
+using Shared_Clipboard_Frontend;
+using Shared_Clipboard_Frontend.Data.api_v1.JSON.Login;
+using Shared_Clipboard_Frontend.Services.api;
+using Shared_Clipboard_Frontend.Services.Validaiton;
+using Shared_Clipboard_Frontend.ViewModels;
 
-namespace Shared_Clipboard_Frontend
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
+        => MauiApp.CreateBuilder()
+            .UseMauiApp<App>()
+            .RegisterServices()
+            .RegisterViewModels()
+            .RegisterViews()
+            .Build();
+
+    public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+        mauiAppBuilder.Services.AddTransient<ILogin, LoginService>();
+        mauiAppBuilder.Services.AddTransient<IValidation, Validation>();
+        return mauiAppBuilder;
+    }
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+    public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddSingleton<LoginViewModel>();
+        return mauiAppBuilder;
+    }
 
-            return builder.Build();
-        }
+    public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddSingleton<LoginPage>();
+        return mauiAppBuilder;
     }
 }
