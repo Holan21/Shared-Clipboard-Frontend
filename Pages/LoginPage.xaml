@@ -18,36 +18,50 @@
                     Padding="18">
                     <VerticalStackLayout Spacing="12">
                         <Label
-                            Text="Login"
-                            FontSize="24"
-                            HorizontalOptions="Center"
-                            Margin="0,0,0,6"/>
+                          Text="Login"
+                          FontSize="24"
+                          HorizontalOptions="Center"
+                          Margin="0,0,0,6"/>
 
                         <Entry
-                            x:Name="EmailEntry"
-                            Text="{Binding Email}"
-                            Placeholder="Email"
-                            HorizontalOptions="Fill"
-                            Margin="0"/>
-
-                        <Entry
-                            x:Name="PasswordEntry"
-                            Text="{Binding Password}"
-                            Placeholder="Password"
-                            IsPassword="True"
-                            HorizontalOptions="Fill"/>
-
-                        <Button
-                            Text="Login"
-                            HorizontalOptions="Fill"
-                            HeightRequest="44" 
-                            Command="{Binding LoginCommand}"/>
+                          x:Name="EmailEntry"
+                          Text="{Binding Email}"
+                          Placeholder="Email"
+                          HorizontalOptions="Fill"
+                          Margin="0"/>
 
                         <Label
-                            Text="Register"
-                            HorizontalOptions="Center"
-                            TextDecorations="Underline"
-                            Margin="0,6,0,0"/>
+                          Text="{Binding EmailError}"
+                          TextColor="Red"
+                          FontSize="12"
+                          IsVisible="{Binding HasEmailError}"
+                          Margin="4,0,0,6"/>
+
+                        <Entry
+                          x:Name="PasswordEntry"
+                          Text="{Binding Password}"
+                          Placeholder="Password"
+                          IsPassword="True"
+                          HorizontalOptions="Fill"/>
+
+                        <Label
+                          Text="{Binding PasswordError}"
+                          TextColor="Red"
+                          FontSize="12"
+                          IsVisible="{Binding HasPasswordError}"
+                          Margin="4,0,0,6"/>
+
+                        <Button
+                          Text="Login"
+                          HorizontalOptions="Fill"
+                          HeightRequest="44" 
+                          Command="{Binding LoginCommand}"/>
+
+                        <Label
+                          Text="Register"
+                          HorizontalOptions="Center"
+                          TextDecorations="Underline"
+                          Margin="0,6,0,0"/>
                     </VerticalStackLayout>
                 </Border>
             </Grid>

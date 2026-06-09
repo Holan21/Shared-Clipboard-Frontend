@@ -2,6 +2,7 @@
 using Shared_Clipboard_Frontend;
 using Shared_Clipboard_Frontend.Data.api_v1.JSON.Login;
 using Shared_Clipboard_Frontend.Services.api;
+using Shared_Clipboard_Frontend.Services.Validaiton;
 using Shared_Clipboard_Frontend.ViewModels;
 
 public static class MauiProgram
@@ -17,6 +18,7 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddTransient<ILogin, LoginService>();
+        mauiAppBuilder.Services.AddTransient<IValidation, Validation>();
         return mauiAppBuilder;
     }
 
