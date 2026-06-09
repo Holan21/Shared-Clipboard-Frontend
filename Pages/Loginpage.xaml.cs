@@ -1,6 +1,4 @@
-﻿using Shared_Clipboard_Frontend.Services.api;
-using Shared_Clipboard_Frontend.ViewModels;
-using System.Diagnostics;
+﻿using Shared_Clipboard_Frontend.ViewModels;
 
 namespace Shared_Clipboard_Frontend
 {

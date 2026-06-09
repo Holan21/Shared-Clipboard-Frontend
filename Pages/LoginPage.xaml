@@ -61,7 +61,12 @@
                           Text="Register"
                           HorizontalOptions="Center"
                           TextDecorations="Underline"
-                          Margin="0,6,0,0"/>
+                          Margin="0,6,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                Command="{Binding GoToRegisterCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </VerticalStackLayout>
                 </Border>
             </Grid>

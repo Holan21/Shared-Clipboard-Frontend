@@ -76,6 +76,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Models\" />
 	  <Folder Include="Resources\Images\" />
 	</ItemGroup>
 
