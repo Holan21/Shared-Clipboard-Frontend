@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Shared_Clipboard_Frontend.Pages.RegisterPage"
+    xmlns:viewmodel="clr-namespace:Shared_Clipboard_Frontend.ViewModels"
+    x:DataType="viewmodel:RegisterViewModel"
+    BackgroundColor="#1F1F1F">
+
+    <ScrollView>
+        <Grid VerticalOptions="Center" HorizontalOptions="Center">
+            <Grid WidthRequest="400" x:Name="FormContainer" HorizontalOptions="Center">
+                <Border
+                    Stroke="#2B0B98"
+                    StrokeThickness="2"
+                    BackgroundColor="#000000"
+                    Padding="18">
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            Text="Register"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            Margin="0,0,0,6"
+                            TextColor="White"/>
+
+                        <Entry
+                            x:Name="UsernameEntry"
+                            Text="{Binding Username}"
+                            Placeholder="Username"
+                            HorizontalOptions="Fill"
+                            Margin="0"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
+
+                        <Label
+                            Text="{Binding UsernameError}"
+                            TextColor="Red"
+                            FontSize="12"
+                            IsVisible="{Binding HasUsernameError}"
+                            Margin="4,0,0,6"/>
+
+                        <Entry
+                            x:Name="EmailEntry"
+                            Text="{Binding Email}"
+                            Placeholder="Email"
+                            HorizontalOptions="Fill"
+                            Margin="0"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
+
+                        <Label
+                            Text="{Binding EmailError}"
+                            TextColor="Red"
+                            FontSize="12"
+                            IsVisible="{Binding HasEmailError}"
+                            Margin="4,0,0,6"/>
+
+                        <Entry
+                            x:Name="PasswordEntry"
+                            Text="{Binding Password}"
+                            Placeholder="Password"
+                            IsPassword="True"
+                            HorizontalOptions="Fill"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
+
+                        <Label
+                            Text="{Binding PasswordError}"
+                            TextColor="Red"
+                            FontSize="12"
+                            IsVisible="{Binding HasPasswordError}"
+                            Margin="4,0,0,6"/>
+
+                        <Entry
+                            x:Name="ConfirmPasswordEntry"
+                            Text="{Binding ConfirmPassword}"
+                            Placeholder="Confirm Password"
+                            IsPassword="True"
+                            HorizontalOptions="Fill"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
+
+                        <Label
+                            Text="{Binding ConfirmPasswordError}"
+                            TextColor="Red"
+                            FontSize="12"
+                            IsVisible="{Binding HasConfirmPasswordError}"
+                            Margin="4,0,0,6"/>
+
+                        <Button
+                            Text="Register"
+                            HorizontalOptions="Fill"
+                            HeightRequest="44"
+                            Command="{Binding RegisterCommand}"
+                            BackgroundColor="#2B0B98"
+                            TextColor="White"/>
+
+                        <Label
+                            Text="Already have an account? Login"
+                            HorizontalOptions="Center"
+                            TextDecorations="Underline"
+                            Margin="0,6,0,0"
+                            TextColor="White">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToLoginPageCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollView>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="WidthStates">
+            <VisualState x:Name="Narrow">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="0" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="FormContainer" Property="WidthRequest" Value="320" />
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState x:Name="Normal">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="600" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="FormContainer" Property="WidthRequest" Value="420" />
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState x:Name="Wide">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="900" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="FormContainer" Property="WidthRequest" Value="520" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+</ContentPage>

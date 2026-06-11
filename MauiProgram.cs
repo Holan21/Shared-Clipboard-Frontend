@@ -1,25 +1,48 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Shared_Clipboard_Frontend;
+using Shared_Clipboard_Frontend.Data.api_v1.JSON.Auth;
+using Shared_Clipboard_Frontend.Data.api_v1.JSON.Clipboard;
+using Shared_Clipboard_Frontend.Pages;
+using Shared_Clipboard_Frontend.Services.api;
+using Shared_Clipboard_Frontend.Services.hubs;
+using Shared_Clipboard_Frontend.Services.Secure;
+using Shared_Clipboard_Frontend.Services.Validaiton;
+using Shared_Clipboard_Frontend.ViewModels;
 
-namespace Shared_Clipboard_Frontend
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
+        => MauiApp.CreateBuilder()
+            .UseMauiApp<App>()
+            .RegisterServices()
+            .RegisterViewModels()
+            .RegisterViews()
+            .Build();
+
+    public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
-
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
-
-            return builder.Build();
-        }
+        mauiAppBuilder.Services.AddTransient<IAuth, AuthService>();
+        mauiAppBuilder.Services.AddTransient<IValidation, Validation>();
+        mauiAppBuilder.Services.AddTransient<ISecureStorageService,SecureStorageService>();
+        mauiAppBuilder.Services.AddTransient<IClipboardService,ClipboardService>();
+        mauiAppBuilder.Services.AddTransient<ClipboardHub>();
+        return mauiAppBuilder;
     }
+
+    public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddSingleton<LoginViewModel>();
+        mauiAppBuilder.Services.AddSingleton<RegisterViewModel>();
+        mauiAppBuilder.Services.AddTransient<MainViewModel>();
+        mauiAppBuilder.Services.AddSingleton<ClipboardItemViewModel>();
+        return mauiAppBuilder;
+    }
+
+    public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddSingleton<LoginPage>();
+        mauiAppBuilder.Services.AddSingleton<RegisterPage>();
+        mauiAppBuilder.Services.AddTransient<MainPage>();
+        return mauiAppBuilder;
+    }
+
 }

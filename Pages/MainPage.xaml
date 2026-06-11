@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Shared_Clipboard_Frontend.Pages.MainPage"
+    xmlns:viewmodel="clr-namespace:Shared_Clipboard_Frontend.ViewModels"
+    x:DataType="viewmodel:MainViewModel"
+    BackgroundColor="#1F1F1F">
+
+    <Grid RowDefinitions="Auto,*" Padding="16">
+        <Border
+            Grid.Row="0"
+            Stroke="#2B0B98"
+            StrokeThickness="2"
+            BackgroundColor="#000000"
+            Padding="12"
+            Margin="0,0,0,12">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <Label
+                    Text="Shared Clipboard"
+                    FontSize="24"
+                    VerticalOptions="Center"
+                    TextColor="White"/>
+                <Button
+                    Grid.Column="1"
+                    Text="Logout"
+                    HeightRequest="40"
+                    WidthRequest="80"
+                    Margin="8,0"
+                    Command="{Binding LogoutCommand}"
+                    BackgroundColor="#2B0B98"
+                    TextColor="White"
+                    CornerRadius="8"/>
+                <Button
+                    Grid.Column="2"
+                    Text="+ Add"
+                    HeightRequest="40"
+                    WidthRequest="80"
+                    Command="{Binding AddClipboardItemCommand}"
+                    BackgroundColor="#2B0B98"
+                    TextColor="White"
+                    CornerRadius="8"/>
+            </Grid>
+        </Border>
+
+        <CollectionView
+            Grid.Row="1"
+            ItemsSource="{Binding ClipboardItems}"
+            SelectionMode="None">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    Spacing="8">
+                    <Label 
+                        Text="No clipboard items" 
+                        FontSize="18" 
+                        HorizontalOptions="Center"
+                        TextColor="White"/>
+                    <Label 
+                        Text="Press '+' to add new item" 
+                        FontSize="14" 
+                        HorizontalOptions="Center"
+                        TextColor="Gray"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodel:ClipboardItemViewModel">
+                    <Border
+                        Stroke="#2B0B98"
+                        StrokeThickness="1"
+                        BackgroundColor="#000000"
+                        Padding="12"
+                        Margin="0,0,0,8">
+                        <VerticalStackLayout Spacing="8">
+                            <Border
+                                BackgroundColor="#1F1F1F"
+                                Padding="10"
+                                StrokeThickness="0">
+                                <Label 
+                                    Text="{Binding Content}"
+                                    FontSize="14"
+                                    TextColor="White"/>
+                            </Border>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label
+                                    Grid.Column="0"
+                                    Text="{Binding CreatedAt, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
+                                    FontSize="12"
+                                    TextColor="Gray"
+                                    VerticalOptions="Center"/>
+                                <HorizontalStackLayout
+                                    Grid.Column="1"
+                                    Spacing="8">
+                                    <Button
+                                        Text="📋"
+                                        HeightRequest="32"
+                                        WidthRequest="32"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding CopyCommand}"
+                                        TextColor="White"/>
+                                    <Button
+                                        Text="🗑"
+                                        HeightRequest="32"
+                                        WidthRequest="32"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding DeleteCommand}"
+                                        TextColor="White"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
