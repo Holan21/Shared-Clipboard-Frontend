@@ -7,20 +7,20 @@ using Shared_Clipboard_Frontend.Services.Validaiton;
 namespace Shared_Clipboard_Frontend.ViewModels
 {
     public partial class LoginViewModel(
-        ILogin loginService,
+        IAuth authService,
         IValidation validationService) : ObservableObject
     {
         [ObservableProperty]
-        private string email = string.Empty;
+        public partial string Email { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string password = string.Empty;
+        public partial string Password { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string emailError = string.Empty;
+        public partial string EmailError { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string passwordError = string.Empty;
+        public partial string PasswordError { get; set; } = string.Empty;
 
 
         public bool HasEmailError => !string.IsNullOrEmpty(EmailError);
@@ -59,24 +59,29 @@ namespace Shared_Clipboard_Frontend.ViewModels
 
             if (!isValidPassword)
                 PasswordError = feedbackPassword;
-            
+
             if (!isValidEmail || !isValidPassword)
                 return;
 
             try
             {
-                await loginService.LoginAsync(Email, Password);
+                var response = await authService.LoginAsync(Email, Password);
+                if (response == System.Net.HttpStatusCode.OK)
+                {
+                    await Shell.Current.GoToAsync("//" + nameof(MainPage));
+                }
+
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                PasswordError = "Login failed: " + ex.Message;
+                PasswordError = "Login failed";
             }
         }
 
         [RelayCommand]
         private async Task GoToRegister()
         {
-            await Shell.Current.GoToAsync(nameof(RegisterPage));
+            await Shell.Current.GoToAsync( "//" +nameof(RegisterPage));
         }
     }
 }

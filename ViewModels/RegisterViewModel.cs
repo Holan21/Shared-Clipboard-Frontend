@@ -1,50 +1,44 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Shared_Clipboard_Frontend.Data.api_v1.JSON.Auth;
+using Shared_Clipboard_Frontend.Pages;
 using Shared_Clipboard_Frontend.Services.api;
 using Shared_Clipboard_Frontend.Services.Validaiton;
 
 namespace Shared_Clipboard_Frontend.ViewModels
 {
     public partial class RegisterViewModel(
-        IRegister registerService,
+        IAuth authService,
         IValidation validationService) : ObservableObject
     {
         [ObservableProperty]
-        private string username = string.Empty;
+        public partial string Username { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string email = string.Empty;
+        public partial string Email { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string password = string.Empty;
+        public partial string Password { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string confirmPassword = string.Empty;
+        public partial string ConfirmPassword { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string usernameError = string.Empty;
+        public partial string UsernameError { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string emailError = string.Empty;
+        public partial string EmailError { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string passwordError = string.Empty;
+        public partial string PasswordError { get; set; } = string.Empty;
 
         [ObservableProperty]
-        private string confirmPasswordError = string.Empty;
+        public partial string ConfirmPasswordError { get; set; } = string.Empty;
 
         public bool HasUsernameError => !string.IsNullOrEmpty(UsernameError);
         public bool HasEmailError => !string.IsNullOrEmpty(EmailError);
         public bool HasPasswordError => !string.IsNullOrEmpty(PasswordError);
         public bool HasConfirmPasswordError => !string.IsNullOrEmpty(ConfirmPasswordError);
-
-        void ClearErrors()
-        {
-            UsernameError = string.Empty;
-            EmailError = string.Empty;
-            PasswordError = string.Empty;
-            ConfirmPasswordError = string.Empty;
-        }
 
         partial void OnUsernameErrorChanged(string value) => OnPropertyChanged(nameof(HasUsernameError));
         partial void OnEmailErrorChanged(string value) => OnPropertyChanged(nameof(HasEmailError));
@@ -75,6 +69,24 @@ namespace Shared_Clipboard_Frontend.ViewModels
                 ConfirmPasswordError = string.Empty;
         }
 
+        void ClearErrors()
+        {
+            UsernameError = string.Empty;
+            EmailError = string.Empty;
+            PasswordError = string.Empty;
+            ConfirmPasswordError = string.Empty;
+        }
+
+        public void ClearAll()
+        {
+            Username = string.Empty;
+            Email = string.Empty;
+            Password = string.Empty;
+            ConfirmPassword = string.Empty;
+
+            ClearErrors();
+        }
+
         [RelayCommand]
         async Task RegisterAsync()
         {
@@ -102,14 +114,15 @@ namespace Shared_Clipboard_Frontend.ViewModels
 
             try
             {
-                await registerService.RegisterAsync(Username, Email, Password);
+                await authService.RegisterAsync(Email, Username, Password);
 
                 await Application.Current.MainPage.DisplayAlertAsync(
                     "Success",
                     "Registration successful! Please login.",
                     "OK");
+                ClearAll();
 
-                await Shell.Current.GoToAsync("..");
+                await Shell.Current.GoToAsync("//" + nameof(LoginPage));
             }
             catch (Exception ex)
             {
@@ -117,27 +130,12 @@ namespace Shared_Clipboard_Frontend.ViewModels
             }
         }
 
-        public void ClearAll()
-        {
-            username = string.Empty;
-            email = string.Empty;
-            password = string.Empty;
-            confirmPassword = string.Empty;
-
-            OnPropertyChanged(username);
-            OnPropertyChanged(email);
-            OnPropertyChanged(password);
-            OnPropertyChanged(confirmPassword);
-
-            ClearErrors();
-        }
-
         [RelayCommand]
         private async Task GoToLoginPage()
         {
             ClearAll();
 
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("//" + nameof(LoginPage));
         }
     }
 }

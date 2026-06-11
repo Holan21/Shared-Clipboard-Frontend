@@ -4,17 +4,6 @@ namespace Shared_Clipboard_Frontend.Services.Validaiton
 {
     public class Validation : IValidation
     {
-        private readonly Regex EmailRegex = new(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
-        private readonly Regex PasswordRegex = new(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$", RegexOptions.Compiled);
-        private readonly Regex UsernameRegex = new(@"^[a-zA-Z0-9_-]{3,}$", RegexOptions.Compiled);
-
-        private readonly int _minPasswordLength = 8;
-        private readonly int _minUsernameLength = 3;
-
-        private readonly string _requiredString = "❌{0} required";
-        private readonly string _invalidString = "❌{0} is invalid";
-        private readonly string _shortString = "❌{0} is minimum {1} characters";
-        private readonly string _passwordsDoNotMatchString = "❌Passwords do not match";
 
         public (bool, string) ValidateEmail(string email)
         {
@@ -24,12 +13,12 @@ namespace Shared_Clipboard_Frontend.Services.Validaiton
             if (string.IsNullOrWhiteSpace(email))
             {
                 resultBool = false;
-                resultString = string.Format(_requiredString, nameof(email));
+                resultString = string.Format(ConstProvider.RequiredString, nameof(email));
             }
-            else if (!EmailRegex.IsMatch(email))
+            else if (!ConstProvider.EmailRegex.IsMatch(email))
             {
                 resultBool = false;
-                resultString = string.Format(_invalidString, nameof(email));
+                resultString = string.Format(ConstProvider.InvalidString, nameof(email));
             }
 
             return (resultBool, resultString);
@@ -43,17 +32,17 @@ namespace Shared_Clipboard_Frontend.Services.Validaiton
             if (string.IsNullOrWhiteSpace(password))
             {
                 resultBool = false;
-                result = string.Format(_requiredString, nameof(password));
+                result = string.Format(ConstProvider.RequiredString, nameof(password));
             }
-            else if (password.Length < _minPasswordLength)
+            else if (password.Length < ConstProvider.MinPasswordLength)
             {
                 resultBool = false;
-                result = string.Format(_shortString, nameof(password), _minPasswordLength);
+                result = string.Format(ConstProvider.ShortString, nameof(password), ConstProvider.MinPasswordLength);
             }
-            else if (!PasswordRegex.IsMatch(password))
+            else if (!ConstProvider.PasswordRegex.IsMatch(password))
             {
                 resultBool = false;
-                result = string.Format(_invalidString, nameof(password));
+                result = string.Format(ConstProvider.InvalidString, nameof(password));
             }
 
             return (resultBool, result);
@@ -67,17 +56,17 @@ namespace Shared_Clipboard_Frontend.Services.Validaiton
             if (string.IsNullOrWhiteSpace(username))
             {
                 resultBool = false;
-                resultString = string.Format(_requiredString, nameof(username));
+                resultString = string.Format(ConstProvider.RequiredString, nameof(username));
             }
-            else if (username.Length < _minUsernameLength)
+            else if (username.Length < ConstProvider.MinUsernameLength)
             {
                 resultBool = false;
-                resultString = string.Format(_shortString, nameof(username), _minUsernameLength);
+                resultString = string.Format(ConstProvider.ShortString, nameof(username), ConstProvider.MinUsernameLength);
             }
-            else if (!UsernameRegex.IsMatch(username))
+            else if (!ConstProvider.UsernameRegex.IsMatch(username))
             {
                 resultBool = false;
-                resultString = string.Format(_invalidString, nameof(username));
+                resultString = string.Format(ConstProvider.InvalidString, nameof(username));
             }
 
             return (resultBool, resultString);
@@ -91,12 +80,12 @@ namespace Shared_Clipboard_Frontend.Services.Validaiton
             if (string.IsNullOrWhiteSpace(confirmPassword))
             {
                 resultBool = false;
-                resultString = string.Format(_requiredString, "Confirm password");
+                resultString = string.Format(ConstProvider.RequiredString, "Confirm password");
             }
             else if (password != confirmPassword)
             {
                 resultBool = false;
-                resultString = _passwordsDoNotMatchString;
+                resultString = ConstProvider.PasswordsDoNotMatchString;
             }
 
             return (resultBool, resultString);

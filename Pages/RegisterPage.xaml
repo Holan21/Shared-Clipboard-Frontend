@@ -5,29 +5,34 @@
     x:Class="Shared_Clipboard_Frontend.Pages.RegisterPage"
     xmlns:viewmodel="clr-namespace:Shared_Clipboard_Frontend.ViewModels"
     x:DataType="viewmodel:RegisterViewModel"
-    BackgroundColor="{StaticResource OffBlack}">
+    BackgroundColor="#1F1F1F">
 
     <ScrollView>
         <Grid VerticalOptions="Center" HorizontalOptions="Center">
             <Grid WidthRequest="400" x:Name="FormContainer" HorizontalOptions="Center">
                 <Border
-                    Stroke="{StaticResource Tertiary}"
+                    Stroke="#2B0B98"
                     StrokeThickness="2"
-                    BackgroundColor="{StaticResource Black}"
+                    BackgroundColor="#000000"
                     Padding="18">
                     <VerticalStackLayout Spacing="12">
                         <Label
                             Text="Register"
                             FontSize="24"
                             HorizontalOptions="Center"
-                            Margin="0,0,0,6"/>
+                            Margin="0,0,0,6"
+                            TextColor="White"/>
 
                         <Entry
                             x:Name="UsernameEntry"
                             Text="{Binding Username}"
                             Placeholder="Username"
                             HorizontalOptions="Fill"
-                            Margin="0"/>
+                            Margin="0"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
 
                         <Label
                             Text="{Binding UsernameError}"
@@ -41,7 +46,11 @@
                             Text="{Binding Email}"
                             Placeholder="Email"
                             HorizontalOptions="Fill"
-                            Margin="0"/>
+                            Margin="0"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
 
                         <Label
                             Text="{Binding EmailError}"
@@ -55,7 +64,11 @@
                             Text="{Binding Password}"
                             Placeholder="Password"
                             IsPassword="True"
-                            HorizontalOptions="Fill"/>
+                            HorizontalOptions="Fill"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
 
                         <Label
                             Text="{Binding PasswordError}"
@@ -69,7 +82,11 @@
                             Text="{Binding ConfirmPassword}"
                             Placeholder="Confirm Password"
                             IsPassword="True"
-                            HorizontalOptions="Fill"/>
+                            HorizontalOptions="Fill"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
 
                         <Label
                             Text="{Binding ConfirmPasswordError}"
@@ -82,16 +99,18 @@
                             Text="Register"
                             HorizontalOptions="Fill"
                             HeightRequest="44"
-                            Command="{Binding RegisterCommand}"/>
+                            Command="{Binding RegisterCommand}"
+                            BackgroundColor="#2B0B98"
+                            TextColor="White"/>
 
                         <Label
                             Text="Already have an account? Login"
                             HorizontalOptions="Center"
                             TextDecorations="Underline"
-                            Margin="0,6,0,0">
+                            Margin="0,6,0,0"
+                            TextColor="White">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding GoToLoginPageCommand}" />
+                                <TapGestureRecognizer Command="{Binding GoToLoginPageCommand}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </VerticalStackLayout>
@@ -110,7 +129,6 @@
                     <Setter TargetName="FormContainer" Property="WidthRequest" Value="320" />
                 </VisualState.Setters>
             </VisualState>
-
             <VisualState x:Name="Normal">
                 <VisualState.StateTriggers>
                     <AdaptiveTrigger MinWindowWidth="600" />
@@ -119,7 +137,6 @@
                     <Setter TargetName="FormContainer" Property="WidthRequest" Value="420" />
                 </VisualState.Setters>
             </VisualState>
-
             <VisualState x:Name="Wide">
                 <VisualState.StateTriggers>
                     <AdaptiveTrigger MinWindowWidth="900" />

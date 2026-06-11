@@ -2,69 +2,79 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Shared_Clipboard_Frontend.LoginPage"
+    x:Class="Shared_Clipboard_Frontend.Pages.LoginPage"
     xmlns:viewmodel="clr-namespace:Shared_Clipboard_Frontend.ViewModels"
     x:DataType="viewmodel:LoginViewModel"
-    BackgroundColor="{StaticResource OffBlack}"
-    >
+    BackgroundColor="#1F1F1F">
 
     <ScrollView>
         <Grid VerticalOptions="Center" HorizontalOptions="Center">
             <Grid WidthRequest="400" x:Name="FormContainer" HorizontalOptions="Center">
                 <Border
-                    Stroke="{StaticResource Tertiary}"
+                    Stroke="#2B0B98"
                     StrokeThickness="2"
-                    BackgroundColor="{StaticResource Black}"
+                    BackgroundColor="#000000"
                     Padding="18">
                     <VerticalStackLayout Spacing="12">
                         <Label
-                          Text="Login"
-                          FontSize="24"
-                          HorizontalOptions="Center"
-                          Margin="0,0,0,6"/>
+                            Text="Login"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            Margin="0,0,0,6"
+                            TextColor="White"/>
 
                         <Entry
-                          x:Name="EmailEntry"
-                          Text="{Binding Email}"
-                          Placeholder="Email"
-                          HorizontalOptions="Fill"
-                          Margin="0"/>
+                            x:Name="EmailEntry"
+                            Text="{Binding Email}"
+                            Placeholder="Email"
+                            HorizontalOptions="Fill"
+                            Margin="0"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
 
                         <Label
-                          Text="{Binding EmailError}"
-                          TextColor="Red"
-                          FontSize="12"
-                          IsVisible="{Binding HasEmailError}"
-                          Margin="4,0,0,6"/>
+                            Text="{Binding EmailError}"
+                            TextColor="Red"
+                            FontSize="12"
+                            IsVisible="{Binding HasEmailError}"
+                            Margin="4,0,0,6"/>
 
                         <Entry
-                          x:Name="PasswordEntry"
-                          Text="{Binding Password}"
-                          Placeholder="Password"
-                          IsPassword="True"
-                          HorizontalOptions="Fill"/>
+                            x:Name="PasswordEntry"
+                            Text="{Binding Password}"
+                            Placeholder="Password"
+                            IsPassword="True"
+                            HorizontalOptions="Fill"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
 
                         <Label
-                          Text="{Binding PasswordError}"
-                          TextColor="Red"
-                          FontSize="12"
-                          IsVisible="{Binding HasPasswordError}"
-                          Margin="4,0,0,6"/>
+                            Text="{Binding PasswordError}"
+                            TextColor="Red"
+                            FontSize="12"
+                            IsVisible="{Binding HasPasswordError}"
+                            Margin="4,0,0,6"/>
 
                         <Button
-                          Text="Login"
-                          HorizontalOptions="Fill"
-                          HeightRequest="44" 
-                          Command="{Binding LoginCommand}"/>
+                            Text="Login"
+                            HorizontalOptions="Fill"
+                            HeightRequest="44"
+                            Command="{Binding LoginCommand}"
+                            BackgroundColor="#2B0B98"
+                            TextColor="White"/>
 
                         <Label
-                          Text="Register"
-                          HorizontalOptions="Center"
-                          TextDecorations="Underline"
-                          Margin="0,6,0,0">
+                            Text="Register"
+                            HorizontalOptions="Center"
+                            TextDecorations="Underline"
+                            Margin="0,6,0,0"
+                            TextColor="White">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                Command="{Binding GoToRegisterCommand}" />
+                                <TapGestureRecognizer Command="{Binding GoToRegisterCommand}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </VerticalStackLayout>
@@ -83,7 +93,6 @@
                     <Setter TargetName="FormContainer" Property="WidthRequest" Value="320" />
                 </VisualState.Setters>
             </VisualState>
-
             <VisualState x:Name="Normal">
                 <VisualState.StateTriggers>
                     <AdaptiveTrigger MinWindowWidth="600" />
@@ -92,7 +101,6 @@
                     <Setter TargetName="FormContainer" Property="WidthRequest" Value="420" />
                 </VisualState.Setters>
             </VisualState>
-
             <VisualState x:Name="Wide">
                 <VisualState.StateTriggers>
                     <AdaptiveTrigger MinWindowWidth="900" />
