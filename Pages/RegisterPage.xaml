@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Shared_Clipboard_Frontend.Pages.LoginPage"
+    x:Class="Shared_Clipboard_Frontend.Pages.RegisterPage"
     xmlns:viewmodel="clr-namespace:Shared_Clipboard_Frontend.ViewModels"
-    x:DataType="viewmodel:LoginViewModel"
+    x:DataType="viewmodel:RegisterViewModel"
     BackgroundColor="#1F1F1F">
 
     <ScrollView>
@@ -17,11 +17,29 @@
                     Padding="18">
                     <VerticalStackLayout Spacing="12">
                         <Label
-                            Text="Login"
+                            Text="Register"
                             FontSize="24"
                             HorizontalOptions="Center"
                             Margin="0,0,0,6"
                             TextColor="White"/>
+
+                        <Entry
+                            x:Name="UsernameEntry"
+                            Text="{Binding Username}"
+                            Placeholder="Username"
+                            HorizontalOptions="Fill"
+                            Margin="0"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
+
+                        <Label
+                            Text="{Binding UsernameError}"
+                            TextColor="Red"
+                            FontSize="12"
+                            IsVisible="{Binding HasUsernameError}"
+                            Margin="4,0,0,6"/>
 
                         <Entry
                             x:Name="EmailEntry"
@@ -59,22 +77,40 @@
                             IsVisible="{Binding HasPasswordError}"
                             Margin="4,0,0,6"/>
 
+                        <Entry
+                            x:Name="ConfirmPasswordEntry"
+                            Text="{Binding ConfirmPassword}"
+                            Placeholder="Confirm Password"
+                            IsPassword="True"
+                            HorizontalOptions="Fill"
+                            IsTextPredictionEnabled="False"
+                            TextColor="White"
+                            PlaceholderColor="Gray"
+                            BackgroundColor="#2A2A2A"/>
+
+                        <Label
+                            Text="{Binding ConfirmPasswordError}"
+                            TextColor="Red"
+                            FontSize="12"
+                            IsVisible="{Binding HasConfirmPasswordError}"
+                            Margin="4,0,0,6"/>
+
                         <Button
-                            Text="Login"
+                            Text="Register"
                             HorizontalOptions="Fill"
                             HeightRequest="44"
-                            Command="{Binding LoginCommand}"
+                            Command="{Binding RegisterCommand}"
                             BackgroundColor="#2B0B98"
                             TextColor="White"/>
 
                         <Label
-                            Text="Register"
+                            Text="Already have an account? Login"
                             HorizontalOptions="Center"
                             TextDecorations="Underline"
                             Margin="0,6,0,0"
                             TextColor="White">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GoToRegisterCommand}" />
+                                <TapGestureRecognizer Command="{Binding GoToLoginPageCommand}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </VerticalStackLayout>
