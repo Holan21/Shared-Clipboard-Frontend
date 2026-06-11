@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<style name="Maui.MainTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-		<item name="colorPrimary">@color/colorPrimary</item>
-		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-		<item name="colorAccent">@color/colorAccent</item>
-		<item name="android:windowBackground">@color/colorPrimaryDark</item>
-		<item name="android:statusBarColor">@color/colorPrimaryDark</item>
-		<item name="android:navigationBarColor">@color/colorPrimaryDark</item>
-		<!-- Ensure text color for basic widgets -->
-		<item name="android:textColorPrimary">@color/white</item>
-		<item name="android:textColorSecondary">@color/white</item>
-	</style>
-</resources>
+<style name="Maui.MainTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+	<item name="colorPrimary">@color/colorPrimary</item>
+	<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+	<item name="colorAccent">@color/colorAccent</item>
+	<item name="android:windowBackground">@color/colorPrimaryDark</item>
+	<item name="android:statusBarColor">@color/colorPrimaryDark</item>
+	<item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+	<item name="android:textColorPrimary">@color/white</item>
+	<item name="android:textColorSecondary">@color/white</item>
+
+	<item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
+	<item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
+	<item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
+</style>
